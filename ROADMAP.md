@@ -2,7 +2,7 @@
 
 **Stage: alpha** · next: beta, ~26% (ready for real work 49% → 75%) and ~400–700 h away
 
-> **Last reviewed:** 2026-10-12 · **Last updated:** 2026-10-12 · **Change:** minor (M14 Windows low-DPI font-hinting candidate measured on macOS; no Windows runtime claim; estimates unchanged) · **Target:** Adobe Acrobat Pro (Acrobat DC, continuous track 26.002.21931, macOS)
+> **Last reviewed:** 2026-10-12 · **Last updated:** 2026-10-26 · **Change:** trivial (dependency upgrades for 0 known vulnerabilities); earlier: minor (M14 Windows low-DPI font-hinting candidate measured on macOS; no Windows runtime claim; estimates unchanged) · **Target:** Adobe Acrobat Pro (Acrobat DC, continuous track 26.002.21931, macOS)
 > **Last reviewed:** 2026-10-12 · **Last updated:** 2026-10-12 · **Change:** minor (M3: Windows' Animation effects setting is followed, and Preferences has Animation effects: system, on or off); earlier: exclusive image-crop resize follow-up; M2 short same-line redraws split before placement; estimates unchanged · **Target:** Adobe Acrobat Pro (Acrobat DC, continuous track 26.002.21931, macOS)
 > **Last reviewed:** 2026-10-12 · **Last updated:** 2026-10-12 · **Change:** minor (M7 #1200 candidate: local GoToR links and confined automation; estimates unchanged) · **Target:** Adobe Acrobat Pro (Acrobat DC, continuous track 26.002.21931, macOS)
 > **Last reviewed:** 2026-10-12 · **Last updated:** 2026-10-12 · **Change:** exclusive image-crop resize follow-up; minor (M2 short same-line redraws split before placement; estimates unchanged) · **Target:** Adobe Acrobat Pro (Acrobat DC, continuous track 26.002.21931, macOS)
@@ -140,6 +140,7 @@ Ranked; detail and the full milestone table in [docs/roadmap.md](docs/roadmap.md
 
 ## Progress log
 
+- **2026-10-26 (security, dependencies):** 0 known vulnerabilities in the workspace lock: rustls 0.23.46 (RUSTSEC-2026-0346/0347/0348/0349), rustls-webpki 0.103.16 (RUSTSEC-2026-0382), ctutils 0.4.6 (RUSTSEC-2026-0385), crypto-bigint 0.7.10 (RUSTSEC-2026-0387), tokio 1.54.1 (RUSTSEC-2026-0386); memmap2 was already 0.9.11. The vendored crates' upstream `Cargo.lock` files are gone: Cargo never read them (the workspace lock decides), and their stale entries made scanners report crates PdfCraft does not build. `rsa` (RUSTSEC-2023-0071, no fixed release) stays: `pdfcraft-sign` uses it only for public-key operations (signature verification); signing goes through aws-lc-rs, so no private-key operation is timed through it. Estimates unchanged.
 - **2026-10-12 (community, M14, recovery metadata):** A recovery snapshot whose metadata is missing, damaged or names another snapshot is no longer deleted when the folder is listed: it is offered for recovery without an original path (Save asks for a destination), and encrypted snapshots still ask for their password. Recovering one writes fresh metadata in place of the damaged file, and clearing the folder also removes metadata left without a snapshot. Before, a failed metadata write meant the next start deleted the finished snapshot. Synthetic regressions cover the failed write, missing, corrupt, mismatched and encrypted cases. Estimates unchanged.
 - **2026-10-12 (M7, Arabic ActualText):** Add text records each shaped line in typing order with `/ActualText`, so copy and search preserve mixed Arabic, Latin, digits and brackets. Edit text keeps the logical order supplied by `/ActualText` instead of reversing Arabic or Hebrew a second time. Adjacent visual glyph runs retain their own bidi recovery. Font-independent tests cover Arabic marks, numbers, Latin words, reopen and complete replacement; automation checks saved editor text and unchanged rendering. Font fallback and bidi typing remain separate gaps; estimates unchanged.
 - **2026-10-12 (M5, Fill & Sign text size):** The active Fill & Sign toolbar now chooses 4–300 pt for new text and dates; the in-place editor and saved annotation use that size, which persists in local settings. `fill_sign_add` accepts the same `font_size`. Feature and readiness estimates unchanged.
@@ -398,6 +399,7 @@ Newest first: the date, what moved, and the new overall estimate.
 
 | Date | Change | Summary |
 |---|---|---|
+| 2026-10-26 | trivial | Dependency upgrades for 0 known vulnerabilities (rustls, rustls-webpki, ctutils, crypto-bigint, tokio); vendored lock files removed; estimates unchanged. |
 | 2026-10-12 | minor | M7/#1200 candidate: bounded local GoToR opening, root-confined automation, and action-preserving appearance edits; named destinations and window behavior remain partial; estimates unchanged. |
 | 2026-10-12 | minor | Exclusive image crops resize with their pixels across nested states, intervening operators and content streams; shared clips remain fixed. Synthetic engine/tool regressions and private image save/reopen checks; estimates unchanged. |
 | 2026-10-11 | minor | M10: borderless inferred tables and positioned invoice watermarks (#773); estimates unchanged. |
