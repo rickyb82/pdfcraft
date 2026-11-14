@@ -30,7 +30,8 @@ concurrency:
 env:
   APP_NAME: pdfcraft
   APP_TITLE: PdfCraft
-  CRAFT_FONTS_REF: 3d9ab3a132ed0eff457e424226a435a901da30d3
+  # The craft-fonts commit release.yml, ci.yml and freebsd.yml pin: a newer PdfCraft needs the fonts it lists.
+  CRAFT_FONTS_REF: b076417b5880bd4154bd22f00695b1d28c6bea83
 
 jobs:
   version:
